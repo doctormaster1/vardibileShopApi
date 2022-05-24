@@ -9,7 +9,7 @@
 - [Cloudinary API](https://cloudinary.com/)
 
 ## Installation
-**1. Clone this repo command :**
+**1. Clone this repo :**
 ```
 git clone https://github.com/doctormaster1/vardibileShopApi.git
 cd vardibileShopApi
