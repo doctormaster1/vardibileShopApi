@@ -1,6 +1,7 @@
 // Importing Modules
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import fileUpload from "express-fileupload";
 
 // Importing Databases
@@ -31,6 +32,7 @@ server.use(
     useTempFiles: true,
   })
 );
+server.use(cors({ origin: process.env.WHITELIST_URL }));
 
 // Routing
 server.use("/api/auth", authRoute);
