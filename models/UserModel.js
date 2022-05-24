@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import { genToken } from "../utilis/genToken";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -39,6 +40,12 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.pre("remove", async function (next) {
+  await this.model("Review").deleteMany({ userId: this._id });
+  await this.model("Order").deleteMany({ userId: this._id });
+  next();
+});
+
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
@@ -46,6 +53,10 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, SaltFactor);
   next();
 });
+
+UserSchema.methods.genAuthToken = function () {
+  return genToken(this._id.toHexString());
+};
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
