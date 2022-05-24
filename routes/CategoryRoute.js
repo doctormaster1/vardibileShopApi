@@ -9,17 +9,18 @@ import {
   updateCategory,
   removeCategory,
 } from "../controllers/CategoryController";
+import { protect } from "../middlewares/auth";
 
 const router = Router();
 
 router
   .route("/")
   .get(advanceResults(Category), getCategories)
-  .post(addCategory);
+  .post(protect, addCategory);
 router
   .route("/:categoryId")
   .get(getCategory)
-  .put(updateCategory)
-  .delete(removeCategory);
+  .put(protect, updateCategory)
+  .delete(protect, removeCategory);
 
 export default router;

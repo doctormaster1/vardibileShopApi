@@ -11,8 +11,11 @@ import {
   payment,
   deliverOrder,
 } from "../controllers/OrderConstroller";
+import { protect } from "../middlewares/auth";
 
 const router = Router();
+
+router.use(protect);
 
 router
   .route("/")

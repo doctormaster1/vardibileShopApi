@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import reviewRouter from "./ReviewRoute";
 import advanceResults from "../middlewares/advanceResults";
 import Product from "../models/ProductModel";
 import {
@@ -9,6 +10,7 @@ import {
   updateProduct,
   removeProduct,
 } from "../controllers/ProductController";
+import { protect } from "../middlewares/auth";
 
 const router = Router();
 
@@ -22,11 +24,12 @@ router
     getProducts,
     getProducts
   )
-  .post(createProduct);
+  .post(protect, createProduct);
+router.route("/:productId/reviews", reviewRouter);
 router
   .route("/:productId")
   .get(getProduct)
-  .put(updateProduct)
-  .delete(removeProduct);
+  .put(protect, updateProduct)
+  .delete(protect, removeProduct);
 
 export default router;

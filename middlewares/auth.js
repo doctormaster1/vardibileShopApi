@@ -4,7 +4,9 @@ import User from "../models/UserModel";
 
 export const protect = asyncHandle(async (req, res, next) => {
   const authorization = req.headers["authorization"];
-  if (!(authorization && authorization.toLowerCase().startWith("bearer")))
+  if (
+    !(authorization && authorization.toLowerCase().split(" ")[0] === "bearer")
+  )
     throw res.status(401).send("İzinsiz");
 
   const token = authorization.split(" ")[1];

@@ -10,6 +10,7 @@ import {
   removeReview,
   updateRating,
 } from "../controllers/ReviewController";
+import { protect } from "../middlewares/auth";
 
 const router = Router({ mergeParams: true });
 
@@ -19,8 +20,12 @@ router
     advanceResults(Review, { path: "productId", select: "name brand" }),
     getReviews
   )
-  .post(createReview);
-router.route("/:id").get(getReview).put(updateReview).delete(removeReview);
-router.route("/update-rating/:id").put(updateRating);
+  .post(protect, createReview);
+router
+  .route("/:id")
+  .get(getReview)
+  .put(protect, updateReview)
+  .delete(protect, removeReview);
+router.route("/update-rating/:id").put(protect, updateRating);
 
 export default router;

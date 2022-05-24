@@ -9,8 +9,11 @@ import {
   updateUser,
   removeUser,
 } from "../controllers/UserController";
+import { protect } from "../middlewares/auth";
 
 const router = Router();
+
+router.use(protect);
 
 router.route("/").get(advanceResults(User), getUsers).post(createUser);
 router.route("/:id").get(getUser).put(updateUser).delete(removeUser);
