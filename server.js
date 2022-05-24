@@ -1,11 +1,14 @@
-// Importing modules
+// Importing Modules
 import express from "express";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
 
+// Importing Databases
 import connectDB from "./config/db";
+import client from "./config/redis";
 
 // Importing Router
+import authRoute from "./routes/AuthRoute";
 import userRouter from "./routes/UserRoute";
 import productRouter from "./routes/ProductRoute";
 import reviewRoute from "./routes/ReviewRoute";
@@ -16,7 +19,10 @@ import orderRoute from "./routes/OrderRoute";
 dotenv.config({ path: "./config/.env" });
 const server = express();
 const PORT = process.env.PORT || 5000;
-connectDB();
+
+// Connected Databases
+await connectDB();
+await client.connect();
 
 // Middlewares
 server.use(express.json());
@@ -27,6 +33,7 @@ server.use(
 );
 
 // Routing
+server.use("/api/auth", authRoute);
 server.use("/api/user", userRouter);
 server.use("/api/product", productRouter);
 server.use("/api/review", reviewRoute);
