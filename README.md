@@ -23,7 +23,12 @@ npm install
 **3. Create a .env file in config folder :**
 ```
 MONGO_URI = //your mongoDB URI
+REDIS_URI = //your redis URI
 PORT = 4000
+
+JWT_SECRET_KEY = // token secret key
+JWT_EXPIRATION = // token expiration in seconds
+JWT_REFRESH_EXPIRATION = // refresh token expiration in seconds
 
 FILE_UPLOAD_SIZE = 1000000
 
