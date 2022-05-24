@@ -22,6 +22,7 @@ npm install
 
 **3. Create a .env file in config folder :**
 ```
+WHITELIST_URL = //your client or api url
 MONGO_URI = //your mongoDB URI
 REDIS_URI = //your redis URI
 PORT = 4000
