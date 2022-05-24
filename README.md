@@ -26,6 +26,7 @@ MONGO_URI = //your mongoDB URI
 REDIS_URI = //your redis URI
 PORT = 4000
 
+SECRET = // md5hash of the secret key
 JWT_SECRET_KEY = // token secret key
 JWT_EXPIRATION = // token expiration in seconds
 JWT_REFRESH_EXPIRATION = // refresh token expiration in seconds
