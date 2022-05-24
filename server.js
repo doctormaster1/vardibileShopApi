@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 
+// Importing Custom Middlewares
+import { unknownEndpoint } from "./middlewares/unknownEndpoints";
+import { errorHandler } from "./middlewares/errorHandler";
+
 // Importing Databases
 import connectDB from "./config/db";
 import client from "./config/redis";
@@ -45,6 +49,9 @@ server.use("/api/order", orderRoute);
 server.get("/", (req, res) => {
   res.sendStatus(200);
 });
+
+server.use(unknownEndpoint);
+server.use(errorHandler);
 
 server.listen(PORT, () => {
   console.log(`Api Server Is Running! (${PORT})`);
