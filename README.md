@@ -4,6 +4,7 @@
 - [Node.js](https://nodejs.org/en/)
 - [Express.js](https://expressjs.com/)
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- [Redis](https://redis.io/)
 
 ## API
 - [Cloudinary API](https://cloudinary.com/)
