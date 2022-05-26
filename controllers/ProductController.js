@@ -32,7 +32,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
 
 export const getProduct = asyncHandler(async (req, res, next) => {
   const product = await Product.findById(req.params.productId).populate({
-    path: "Review",
+    path: "Reviews",
     select: "title text",
   });
 
